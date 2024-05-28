@@ -4,8 +4,7 @@
  
 #Keyfile having information about barcodes. Single file for each sample
 #1. Concatenating the paired end reads into a single file
-#Concatenate to merge the files. The bash script concatenate.sh was used to automate the process for
-#all the files. The raw files were named as S1_1.fq S1_2.fq.
+#Concatenate to merge the files. The bash script concatenate.sh was used to automate the process for all the files. The raw files were named as S1_1.fq S1_2.fq.
 
 #!/bin/bash/ START = 1
 END = 121
@@ -13,8 +12,10 @@ for ((i=$START; i<=$END; i++))
 do
 cat S"$i"_1.fq S"$i"_2.fq > S"$i"_comb.fq done
 echo "done"
-we can execute the script using ./concatenate.sh on terminal
+
+#we can execute the script using ./concatenate.sh on terminal
 #move the concatenated files to Scomb
+
 mv *_comb.fq ~/Var_call/data/Scomb
 
 
@@ -25,9 +26,11 @@ barcode_fake(fastq_dir = “home/Var_call/data/Scomb/”, read_length =150)
 
 #3.Commands to run tassel pluins on terminal
 1.	./run_pipeline.pl -Xms100g -Xmx180g -GBSSeqToTagDBPlugin -e MseI -i /home/.../tassel-5- standalone/Scomb/ -db /home/.../GBSv2.db -k /home/.../fakebarcode_key.txt -kmerLength 64 - mnQS 20 - c 5 -endPlugin
+
 #The output for this step is GBSV2.db database file.
 2.	./run_pipeline.pl -Xms100g -Xmx180g -TagExportToFastqPlugin -db /home/../GBSv2.db -o
 /home/../tassel-5-standalone/tempdir/tagsForAlign.fa.gz -endPlugin
+
 #The output form this step is tagsForAlign.fa.gz file (compressed fasta file). Alignment was done using BWA then.
  
 ##################################################################################
@@ -44,8 +47,7 @@ done
 3.	./run_pipeline.pl -Xms100g -Xmx180g -SAMToGBSdbPlugin -i /home/.../tassel-5- standalone/tagsForAlign.sam -db /home/.../GBSv2.db -endPlugin
 #This step will not generate any output, but you will notice the database (GBSV2.db) has been modified.
 4.	./run_pipeline.pl -Xms100g -Xmx180g -DiscoverySNPCallerPluginV2 -db /home/../GBSv2.db -sC 1 - eC 121 -mnMAF 0.01 -endPlugin
-#change the -sC and -eC for start and end sample files for which you need stats for This step will not
-generate any output, but you will notice the database (GBSV2.db) has been modified.
+#change the -sC and -eC for start and end sample files for which you need stats for This step will not generate any output, but you will notice the database (GBSV2.db) has been modified.
 5.	./run_pipeline.pl -Xms100g -Xmx180g -SNPQualityProfilerPlugin -db /home/../GBSv2.db -taxa
 /home/../tassel-5-standalone/IBMGBSTaxaList.txt -tname “IBM” -statFile /home/../tassel-5- standalone/tempDir/SNPQualityStatsIBM.txt -endPlugin
 #(this is via using subset of indivuals)
