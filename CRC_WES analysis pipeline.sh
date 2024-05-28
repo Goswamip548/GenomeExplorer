@@ -1,5 +1,5 @@
-#Preprocessing maf files, add tumor sample id and concatenate into single maf file which is needed in further steps
 #!/bin/bash
+#Preprocessing maf files, add tumor sample id and concatenate into single maf file which is needed in further steps
 for i in *.maf
 do
 id=$(echo $i | cut -d "_" -f1)
@@ -12,9 +12,9 @@ cat header.maf *wh.maf > Alltumor.maf
 
 rm *wh.maf header.maf
 
-#A. Pathogenic/Likely pathogenic information from vcf file
-#!/bin/bash
 
+#!/bin/bash
+#A. Pathogenic/Likely pathogenic information from vcf file
 for vcf_file in *.vcf; do
     sampleid=$(echo "$vcf_file" | cut -d '_' -f1)
     grep -i "pathogenic" "$vcf_file" | grep -vi "conflicting" > "${sampleid}_pathogenics"
@@ -31,9 +31,9 @@ paste sampleids counts > pathogenic_info
 
 rm sampleids counts *PLP_count
 
-#Place "pathogenics" and maf files within the same directory to extract the mutated gene information
-#!/bin/bash
 
+#!/bin/bash
+#Place "pathogenics" and maf files within the same directory to extract the mutated gene information
 for columns_file in *pathogenics;do
         sampleids=$(echo "$columns_file" | cut -d '_' -f1)
         awk '{print $1,$2,$3,$4,$5}' $columns_file > ${sampleids}_vcf_columns
@@ -46,11 +46,11 @@ done
 
 rm *vcf_columns *vcfposition *maf_pos_genes
 
-#B. Tumor Mutational burden
+
 
 #!/bin/bash
 #PG
-
+#B. Tumor Mutational burden
 for i in *.maf
 do
 sampleid=$(echo $i | cut -d '_' -f1)
@@ -74,9 +74,10 @@ done
 
 rm nonsyn_tmb syn_tmb *_count sampleidz
 
+
+#!/bin/bash
 #C. Oncogenes and Tumor suppressor genes mapping
 #Obtain FDA approved cancer related genes from OncoKB and prepare list of oncogenes and tumour suppressor genes as annotated
-#!/bin/bash
 for file in *.maf
 do
 id=$(echo $file | cut -d '_' -f1)
