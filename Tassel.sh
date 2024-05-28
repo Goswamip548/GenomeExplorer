@@ -5,7 +5,8 @@
 #Keyfile having information about barcodes. Single file for each sample
 #1. Concatenating the paired end reads into a single file
 #Concatenate to merge the files. The bash script concatenate.sh was used to automate the process for
-all the files. The raw files were named as S1_1.fq S1_2.fq.
+#all the files. The raw files were named as S1_1.fq S1_2.fq.
+
 #!/bin/bash/ START = 1
 END = 121
 for ((i=$START; i<=$END; i++))
