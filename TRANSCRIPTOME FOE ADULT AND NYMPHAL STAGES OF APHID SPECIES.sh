@@ -3,8 +3,8 @@
 cd ~/trancriptome/data/rawdata for rawreads in *.zip
 do
 unzip $rawreads done
-#this will unzip all the raw zipped files in the working directory and can be executed by bash unziiping,sh
-on terminal
+#this will unzip all the raw zipped files in the working directory and can be executed by bash unziiping,sh on terminal
+
 
 #!/bin/bash
 #2. Quality check
