@@ -27,9 +27,8 @@ cat */summary.txt > ~/transcriptome/docs/fastqc_summaries.txt
 #####################################################################################
 #On the Terminal prompt we can now run this bash script and get automated QC report of our four files.
 bash seq_QC.sh
-Using this we automated our analysis for all our samples. There was adapter contamination in the sequences.
 
-
+#Using this we automated our analysis for all our samples. There was adapter contamination in the sequences.
 
 #3. Trimming reads by trimmomatic
 #Here is an automated bash script for running trimmomatic on all our files getting the paired and unpaired output for our paired end reads
@@ -65,13 +64,13 @@ $TrinityStats.pl '/home/…/trinityLeAd/Trinity.fasta' >& stats.log
 
 #5. Clustering was done using cdhit-est to find unigenes #Trinity.fasta obtained by assembly of all adult and nymph replicates
 cdhit-est -i '/home/…/Transcriptome_Data/Trinity.fasta' -o clusterAdNy.fasta -c 0.80 -M 20000
+
 #6. Quantification using kallisto
 kallisto index -i clusterAdNy.index '/home/…/Transcriptome_Data/cdhit- est/clusterAdNy.fasta' --make-unique
 
 kallisto quant -i clusterLeAdNy.index -o Rep1Ny_1_kallisto -b 100 -t 8 '/home/…/Transcriptome_Data/Rep1ny_1.trim.fastq.gz' '/home/…/Transcriptome_Data/Rep1ny_2.trim.fastq.gz'
 
-#7. Primary Annotation using Blast+ toolkit
-#to get swissprot database
+#7. Primary Annotation using Blast+ toolkit to get swissprot database
  
 wget https://ftp.ncbi.nlm.nih.gov/blast/db/swissprot.tar.gz tar xvzf swissprot.tar.gz
 
