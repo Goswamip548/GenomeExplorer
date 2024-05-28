@@ -1,12 +1,13 @@
-#1. Unzipping rawfiles
 #!/bin/bash
+#1. Unzipping rawfiles
 cd ~/trancriptome/data/rawdata for rawreads in *.zip
 do
 unzip $rawreads done
 #this will unzip all the raw zipped files in the working directory and can be executed by bash unziiping,sh
 on terminal
-#2. Quality check
+
 #!/bin/bash
+#2. Quality check
 #Changing the directory to untrimmed_fastq/
 set -e
 cd ~/transcriptome/data/untrimmed_fastq/
