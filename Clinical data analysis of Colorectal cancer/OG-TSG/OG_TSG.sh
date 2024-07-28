@@ -1,5 +1,5 @@
 #common gene finder script between known cancer genes and genes mutated in our sample 
-
+#!/bin/bash
 for i in *mutgenes
 do
 sampleid=$(echo $i | cut -d '_' -f1)
