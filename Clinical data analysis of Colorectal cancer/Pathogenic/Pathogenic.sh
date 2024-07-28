@@ -1,5 +1,5 @@
 #Pathogenic variants
-#!usr/bin/bash
+#!/bin/bash
 for i in *.vcf
 do
 sampleid=$(echo $i | cut -d '_' -f1)
