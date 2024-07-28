@@ -13,4 +13,9 @@ paste sampleids nonsyn_tmb > samplewise_nonsyn_tmb
 awk '{print $9}' $i | grep -E -wc "Silent" > ${sampleid}_syn_count
 awk "{print \$1/37}" ${sampleid}_syn_count >> syn_tmb
 paste sampleids syn_tmb > samplewise_syn_tmb
+
+awk '{print $9}' $i | grep -E -wc "3'UTR|5'UTR|3'Flank|5'Flank|Frame_Shift_Del|Frame_Shift_Ins|IGR|In_Frame_Ins|In_Frame_Del|Intron|Missense_Mutation|Nonsense_Mutation|Nonstop_Mutati>
+awk "{print \$1/37}" ${sampleid}_nonsyn_count >> total_tmb
+paste sampleidz nonsyn_tmb syn_tmb total_tmb > samplewise_total_tmb
+
 done
