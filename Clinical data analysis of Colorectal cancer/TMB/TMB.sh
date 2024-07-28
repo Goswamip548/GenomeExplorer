@@ -1,5 +1,5 @@
 #Tumor Mutational burden
-
+#!/bin/bash
 for i in *.maf
 do
 sampleid=$(echo $i | cut -d '_' -f1)
