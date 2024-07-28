@@ -1,7 +1,7 @@
-#D. Driver gene distribution
+# Driver gene distribution
 # Obtain list of driver genes in CRC from IntOgen <saved as driver_gene_list>
-#Extracting known driver genes
 
+#!/bin/bash
 for i in *.maf
 do
 sampleid=$(echo $i | cut -d '_' -f1)
